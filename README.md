@@ -1,4 +1,4 @@
 venom-plugin-template
 =====================
 
-template for starting a venom-based vim plugin
+Template for starting a [venom](https://github.com/nielsmadan/venom)-based vim plugin.
