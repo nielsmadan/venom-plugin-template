@@ -1,0 +1,22 @@
+#!/bin/sh
+projectName=$1
+currentDirName=${PWD##*/}
+
+cd ..
+cp -r $currentDirName $projectName
+
+# remove .pyc files (if they exist)
+find $projectName -name "*.pyc" -exec rm {} \;
+
+# rename files
+mv $projectName/plugin/helloworld $projectName/plugin/$projectName
+find $projectName -name "*helloworld*" -exec rename "s/helloworld/$projectName/i" {} \;
+
+# search / replace
+grep -rl "helloworld" $projectName | xargs sed "s/helloworld/$projectName/g" -i
+
+# remove unneeded files
+rm $projectName/new-project
+rm -rf $projectName/.git
+rm -f $projectName/.gitignore
+rm -f $projectName/README.md
